@@ -17,5 +17,5 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Swap Deployment Slot to Production Environment
         run: |
-          az webapp deployment slot swap -g demo-cloudsquad -n demo-cloudsquad-app --slot develop --target-slot production
+          az webapp deployment slot swap -g demo-cloudsquad -n demo-cloudsquad-app --slot demo-cloudsquad-app-develop --target-slot demo-cloudsquad-app
       
