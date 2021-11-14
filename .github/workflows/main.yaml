@@ -1,0 +1,21 @@
+name: Test and Coverage
+
+on:
+ push:
+   branches:
+   - main    
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Swap Deployment Slot to Production Environment
+        run: |
+          az webapp deployment slot swap -g demo-cloudsquad -n demo-cloudsquad-app --slot develop --target-slot production
+      
