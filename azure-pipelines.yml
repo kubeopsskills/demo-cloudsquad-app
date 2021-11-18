@@ -1,0 +1,15 @@
+stages:   
+- stage: Deploy_Stage
+  displayName: Deploy Azure App Service
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+  jobs: 
+    - job: Deploy_Microservice
+      container: public.ecr.aws/kubeopsskills/circleci:1.0.0-docker-azure
+      steps:
+      - checkout: self 
+      - bash: |
+          ${{ secrets.AZURE_CREDENTIALS }}
+        displayName: Azure Login
+      - bash: |
+          az webapp deployment slot swap -g demo-cloudsquad -n demo-cloudsquad-app --slot develop --target-slot production
+        displayName: Swap Deployment Slot to Production Environment
