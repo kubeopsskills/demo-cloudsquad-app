@@ -18,7 +18,7 @@ stages:
         displayName: Azure CLI
         inputs:
           azureSubscription: demo-cloudsquad-svc
-          scriptType: ps
+          scriptType: bash
           scriptLocation: inlineScript
           inlineScript: |
             az webapp deployment slot swap -g demo-cloudsquad -n demo-cloudsquad-app --slot develop --target-slot production
